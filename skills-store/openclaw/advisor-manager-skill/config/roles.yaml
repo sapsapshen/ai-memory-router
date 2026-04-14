@@ -1,0 +1,75 @@
+schema_version: 1
+
+roles:
+  executors:
+    primary:
+      alias: deepseek-chat
+      provider: deepseek
+      model: deepseek-chat
+      capabilities:
+        - tool_calling
+        - code_execution
+        - fast_iteration
+        - broad_reasoning
+      cost_per_million_tokens:
+        input_usd: 0.14
+        output_usd: 0.28
+      context_window: 128000
+    economical_fallback:
+      alias: step-3.5-flash
+      provider: stepfun
+      model: step-3.5-flash
+      capabilities:
+        - tool_calling
+        - fast_iteration
+        - vision
+      cost_per_million_tokens:
+        input_usd: 0.0
+        output_usd: 0.0
+      context_window: 256000
+    ultra_low_cost:
+      alias: moonshot-v1-32k
+      provider: moonshot
+      model: moonshot-v1-32k
+      capabilities:
+        - broad_reasoning
+      cost_per_million_tokens:
+        input_usd: 0.0
+        output_usd: 0.0
+      context_window: 32000
+
+  advisors:
+    primary:
+      alias: deepseek-coder
+      provider: deepseek
+      model: deepseek-coder
+      capabilities:
+        - strategic_planning
+        - complex_problem_solving
+        - quality_review
+        - advanced_coding
+      cost_per_million_tokens:
+        input_usd: 0.14
+        output_usd: 0.28
+      context_window: 128000
+    secondary:
+      alias: step-3
+      provider: stepfun
+      model: step-3
+      capabilities:
+        - strategic_planning
+        - quality_review
+        - vision
+      cost_per_million_tokens:
+        input_usd: 0.0
+        output_usd: 0.0
+      context_window: 262144
+
+fallback_order:
+  executor:
+    - primary
+    - economical_fallback
+    - ultra_low_cost
+  advisor:
+    - primary
+    - secondary

@@ -1,0 +1,47 @@
+schema_version: 1
+
+strategies:
+  balanced:
+    weights:
+      task_complexity: 0.35
+      execution_failures: 0.25
+      uncertainty: 0.20
+      budget_headroom: 0.10
+      stagnation: 0.10
+    thresholds:
+      summon_advisor: 0.70
+      summon_advisor_critical: 0.85
+    policies:
+      enable_initial_review: true
+      enable_final_review: true
+      reserve_budget_ratio: 0.15
+
+  cost_saver:
+    weights:
+      task_complexity: 0.30
+      execution_failures: 0.30
+      uncertainty: 0.25
+      budget_headroom: 0.05
+      stagnation: 0.10
+    thresholds:
+      summon_advisor: 0.82
+      summon_advisor_critical: 0.92
+    policies:
+      enable_initial_review: false
+      enable_final_review: false
+      reserve_budget_ratio: 0.10
+
+  quality_first:
+    weights:
+      task_complexity: 0.30
+      execution_failures: 0.20
+      uncertainty: 0.20
+      budget_headroom: 0.05
+      stagnation: 0.25
+    thresholds:
+      summon_advisor: 0.58
+      summon_advisor_critical: 0.78
+    policies:
+      enable_initial_review: true
+      enable_final_review: true
+      reserve_budget_ratio: 0.20

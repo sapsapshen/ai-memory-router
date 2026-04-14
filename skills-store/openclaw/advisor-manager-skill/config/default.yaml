@@ -1,0 +1,51 @@
+schema_version: 1
+
+skill:
+  name: advisor-manager
+  output_format: json
+
+runtime:
+  default_strategy: balanced
+  dry_run: false
+  max_iterations: 12
+  allow_provider_fallback: true
+
+roles:
+  auto_assign_by_strength: true
+  allow_user_defined_external_models: true
+  external_model_requires_api_key: true
+  required_candidate_models: 2
+
+budget:
+  soft_limit_usd: 3.0
+  hard_limit_usd: 5.0
+  reserve_for_final_review_usd: 0.75
+
+advisor:
+  cooldown_iterations: 2
+  min_signal_score: 0.70
+  critical_signal_score: 0.85
+  max_calls_per_session: 4
+  initial_review_policy: complex-or-high-risk
+  completion_review_policy: if-budget-reserved
+
+context:
+  max_summary_chars: 4000
+  max_recent_events: 8
+  redact_keys:
+    - api_key
+    - access_token
+    - authorization
+    - password
+    - secret
+    - token
+
+telemetry:
+  log_format: markdown
+  output_dir: out
+
+recovery:
+  total_attempts: 5
+  executor_attempts_before_escalation: 3
+  advisor_attempts_after_escalation: 2
+  include_stack_trace: true

@@ -1,0 +1,30 @@
+[
+  {
+    "Title": "NASA Artemis II 成功发射！",
+    "Source": "Ars Technica",
+    "Link": "https://example.com/nasa",
+    "Description": "四名宇航员奔月，50余年来首次有人登月任务",
+    "Lang": "zh"
+  },
+  {
+    "Title": "SpaceX 秘密提交 IPO",
+    "Source": "TechCrunch",
+    "Link": "https://example.com/spacex",
+    "Description": "估值 1.75 万亿美元，有史以来最大规模 IPO",
+    "Lang": "zh"
+  },
+  {
+    "Title": "Anthropic Claude Code 源码泄露",
+    "Source": "Ars Technica",
+    "Link": "https://example.com/claude",
+    "Description": "泄露揭示 persistent agent、stealth mode 等内部信息",
+    "Lang": "zh"
+  },
+  {
+    "Title": "小鹏汽车定位 AI 科技公司",
+    "Source": "36氪",
+    "Link": "https://example.com/xpeng",
+    "Description": "一辆 12 万级纯电轿车，月交付破两万",
+    "Lang": "zh"
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "name": "advisor-claw-skill",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "Budget-aware advisor orchestration scaffold for AI platform.",
+  "dependencies": {
+    "json5": "^2.2.3"
+  },
+  "scripts": {
+    "smoke": "node ./scripts/smoke_test.js",
+    "start": "node ./scripts/index.js"
+  }
+}

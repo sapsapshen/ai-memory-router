@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Memory Router</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="logo-container">
+      <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Central hub -->
+        <circle cx="32" cy="32" r="8" fill="url(#logoGrad)" />
+        <!-- Orbital ring -->
+        <circle cx="32" cy="32" r="22" stroke="url(#logoGrad)" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.5"/>
+        <!-- Nodes on orbit -->
+        <circle cx="32" cy="10" r="4" fill="#6c63ff" opacity="0.7"/>
+        <circle cx="52" cy="32" r="4" fill="#8b6cc1" opacity="0.7"/>
+        <circle cx="32" cy="54" r="4" fill="#5b8def" opacity="0.7"/>
+        <circle cx="12" cy="32" r="4" fill="#4caf80" opacity="0.7"/>
+        <!-- Connection lines -->
+        <line x1="32" y1="14" x2="32" y2="24" stroke="#6c63ff" stroke-width="1" opacity="0.3"/>
+        <line x1="48" y1="32" x2="40" y2="32" stroke="#8b6cc1" stroke-width="1" opacity="0.3"/>
+        <line x1="32" y1="50" x2="32" y2="40" stroke="#5b8def" stroke-width="1" opacity="0.3"/>
+        <line x1="16" y1="32" x2="24" y2="32" stroke="#4caf80" stroke-width="1" opacity="0.3"/>
+        <!-- Diagonal nodes -->
+        <circle cx="47.5" cy="16.5" r="3" fill="#d45d8a" opacity="0.55"/>
+        <circle cx="47.5" cy="47.5" r="3" fill="#e67e22" opacity="0.55"/>
+        <circle cx="16.5" cy="47.5" r="3" fill="#e74c5e" opacity="0.55"/>
+        <circle cx="16.5" cy="16.5" r="3" fill="#4caf80" opacity="0.55"/>
+        <!-- Diagonal connections -->
+        <line x1="44" y1="19" x2="36" y2="26" stroke="#d45d8a" stroke-width="0.8" opacity="0.2"/>
+        <line x1="44" y1="45" x2="36" y2="38" stroke="#e67e22" stroke-width="0.8" opacity="0.2"/>
+        <line x1="20" y1="45" x2="28" y2="38" stroke="#e74c5e" stroke-width="0.8" opacity="0.2"/>
+        <line x1="20" y1="19" x2="28" y2="26" stroke="#4caf80" stroke-width="0.8" opacity="0.2"/>
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6c63ff"/>
+            <stop offset="100%" stop-color="#8b83ff"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="logo-text">AI Memory Router</span>
+    </div>
+
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-tab="memories">
+        记忆 <span class="tab-badge" id="memoryCount">0</span>
+      </button>
+      <button class="nav-tab" data-tab="skills">
+        技能 <span class="tab-badge" id="skillCount">0</span>
+      </button>
+    </div>
+
+    <div class="nav-spacer"></div>
+    <select class="nav-select" id="targetTool">
+      <option value="">选择目标工具...</option>
+    </select>
+    <button class="nav-btn" id="migrateBtn" disabled>迁移 0 条</button>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+    <!-- SIDEBAR — hierarchical tree -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-tree" id="sidebarTree">
+        <div class="loading"><div class="spinner"></div><p style="margin-top:12px;color:var(--text-tertiary);font-size:13px;">加载中...</p></div>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <!-- Memories Tab -->
+      <div class="tab-panel active" id="tab-memories">
+        <div class="toolbar">
+          <input type="text" class="search-box" id="search" placeholder="搜索标题和内容...">
+          <div class="type-filters" id="typeFilters">
+            <label class="type-chip active" data-type="user">
+              <span class="type-dot" style="background:var(--type-user)"></span>
+              <input type="checkbox" value="user" checked> User
+            </label>
+            <label class="type-chip active" data-type="project">
+              <span class="type-dot" style="background:var(--type-project)"></span>
+              <input type="checkbox" value="project" checked> Project
+            </label>
+            <label class="type-chip active" data-type="feedback">
+              <span class="type-dot" style="background:var(--type-feedback)"></span>
+              <input type="checkbox" value="feedback" checked> Feedback
+            </label>
+            <label class="type-chip active" data-type="reference">
+              <span class="type-dot" style="background:var(--type-reference)"></span>
+              <input type="checkbox" value="reference" checked> Reference
+            </label>
+            <label class="type-chip active" data-type="session">
+              <span class="type-dot" style="background:var(--type-session)"></span>
+              <input type="checkbox" value="session" checked> Session
+            </label>
+          </div>
+        </div>
+        <div class="select-bar">
+          <button onclick="selectAll()">全选</button>
+          <button onclick="deselectAll()">取消</button>
+          <span id="selectedCount">已选：0</span>
+          <span id="totalCount"></span>
+        </div>
+        <div id="memoryList">
+          <div class="loading"><div class="spinner"></div><p style="margin-top:12px;">加载记忆中...</p></div>
+        </div>
+      </div>
+
+      <!-- Skills Tab -->
+      <div class="tab-panel" id="tab-skills">
+        <div class="toolbar">
+          <input type="text" class="search-box" id="skillSearch" placeholder="搜索技能名称和描述...">
+        </div>
+        <div class="select-bar">
+          <button onclick="selectSkillsAll()">全选</button>
+          <button onclick="deselectSkillsAll()">取消</button>
+          <span id="skillsSelectedCount">已选：0</span>
+          <span id="skillsTotalCount"></span>
+        </div>
+        <div id="skillList" class="skill-grid">
+          <div class="loading"><div class="spinner"></div><p style="margin-top:12px;">加载技能中...</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <div id="modalBadges" style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;"></div>
+      <h2 id="modalTitle"></h2>
+      <pre class="modal-pre" id="modalContent"></pre>
+      <button class="modal-close-btn" onclick="closeModal()">关闭</button>
+    </div>
+  </div>
+
+  <!-- Result Panel -->
+  <div class="result-overlay" id="resultPanel">
+    <div class="result-panel" id="resultBox"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

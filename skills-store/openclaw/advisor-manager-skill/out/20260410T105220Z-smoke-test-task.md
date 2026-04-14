@@ -1,0 +1,94 @@
+# Advisor Claw Execution Log
+
+- Task ID: smoke-test-task
+- Title: Smoke test
+- Started At: 2026-04-10T10:52:20.709Z
+
+## Timeline
+### 2026-04-10T10:52:20.710Z | advisor | advisor-stub-auto
+
+- Command: initial_planning
+- Outcome: success
+- Details: iteration=0
+
+### 2026-04-10T10:52:20.711Z | executor | executor-stub-auto
+
+- Command: executor-pass
+- Outcome: success
+- Details: step=1; iteration=1
+
+### 2026-04-10T10:52:20.711Z | executor | executor-stub-auto
+
+- Command: executor-pass
+- Outcome: failure
+- Details: attempt=1
+- Error:
+```text
+Error: executor failed at iteration 2
+    at Object.stub (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\smoke_test.js:10:15)
+    at Object.invoke (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\smoke_test.js:131:55)
+    at AdvisorOrchestrator.runExecutorPass (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:173:48)
+    at action (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:70:44)
+    at AdvisorOrchestrator.executeWithRecovery (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:230:22)
+    at AdvisorOrchestrator.processTask (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:64:39)
+    at async run (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\smoke_test.js:135:18)
+```
+
+### 2026-04-10T10:52:20.712Z | executor | executor-stub-auto
+
+- Command: executor-pass
+- Outcome: failure
+- Details: attempt=2
+- Error:
+```text
+Error: executor failed at iteration 2
+    at Object.stub (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\smoke_test.js:10:15)
+    at Object.invoke (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\smoke_test.js:131:55)
+    at AdvisorOrchestrator.runExecutorPass (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:173:48)
+    at action (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:70:44)
+    at AdvisorOrchestrator.executeWithRecovery (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:230:22)
+    at async AdvisorOrchestrator.processTask (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:64:28)
+    at async run (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\smoke_test.js:135:18)
+```
+
+### 2026-04-10T10:52:20.712Z | executor | executor-stub-auto
+
+- Command: executor-pass
+- Outcome: failure
+- Details: attempt=3
+- Error:
+```text
+Error: executor failed at iteration 2
+    at Object.stub (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\smoke_test.js:10:15)
+    at Object.invoke (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\smoke_test.js:131:55)
+    at AdvisorOrchestrator.runExecutorPass (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:173:48)
+    at action (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:70:44)
+    at AdvisorOrchestrator.executeWithRecovery (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:230:22)
+    at async AdvisorOrchestrator.processTask (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\advisor_orchestrator.js:64:28)
+    at async run (D:\YunXue\advisor-claw\advisor-manager-skill\scripts\smoke_test.js:135:18)
+```
+
+### 2026-04-10T10:52:20.712Z | executor | advisor-stub-auto
+
+- Command: repair-failure:executor-pass
+- Outcome: success
+- Details: attempt=1
+
+### 2026-04-10T10:52:20.712Z | advisor | advisor-stub-auto
+
+- Command: mid_task_guidance
+- Outcome: success
+- Details: iteration=2
+
+### 2026-04-10T10:52:20.713Z | executor | executor-stub-auto
+
+- Command: executor-pass
+- Outcome: success
+- Details: step=3; iteration=3
+
+### 2026-04-10T10:52:20.713Z | advisor | advisor-stub-auto
+
+- Command: quality_assurance
+- Outcome: success
+- Details: iteration=3
+

@@ -1,0 +1,33 @@
+schema_version: 1
+
+candidate_models:
+  - alias: local-sonnet
+    provider: anthropic
+    model: claude-sonnet
+    source: openclaw-configured
+    strength_score: 0.72
+    cost_score: 0.45
+    capabilities:
+      - tool_calling
+      - code_execution
+
+  - alias: local-opus
+    provider: anthropic
+    model: claude-opus
+    source: openclaw-configured
+    strength_score: 0.95
+    cost_score: 0.10
+    capabilities:
+      - strategic_planning
+      - quality_review
+
+  - alias: external-gpt4o-mini
+    provider: openai
+    model: gpt-4o-mini
+    source: external-api-key
+    api_key_env: OPENAI_API_KEY
+    strength_score: 0.60
+    cost_score: 0.92
+    capabilities:
+      - tool_calling
+      - fast_iteration

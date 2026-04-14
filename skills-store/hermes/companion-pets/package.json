@@ -1,0 +1,15 @@
+{
+  "name": "companion-pets",
+  "version": "2.0.0",
+  "description": "多宠物字符动画陪伴小部件 — 纯浏览器原生能力，可注入 openclaw webchat 页面",
+  "main": "companion.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["companion", "pet", "ascii", "webchat", "openclaw"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
+
